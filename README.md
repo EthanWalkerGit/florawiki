@@ -11,22 +11,22 @@ Stack: React, PostgreSQL, Node / Express
 
 ### Done:
 
-Set up DB, creating schema and sample data
-Contanerization of DB and Backend
+- Set up DB, creating schema and sample data
+- Containerization of DB and Backend
 
 ### TODO:
 
-Expand API
-Set up Front End
-Login / Registration / Auth using JWT
-GNU Image Manipulation Assets & CSS
-Hosting
+- Expand API
+- Set up Front End
+- Login / Registration / Auth using JWT
+- GNU Image Manipulation Assets & CSS
+- Hosting
 
 ### Basic Schema:
 
     CREATE TABLE users (
         username VARCHAR(50) PRIMARY KEY,
-        password_hash TEXT NOT NULL,  -- Never store plain passwords!
+        password_hash TEXT NOT NULL,
         fname VARCHAR(100) NOT NULL,
         lname VARCHAR(100) NOT NULL,
         created_at TIMESTAMP DEFAULT NOW()
@@ -39,14 +39,14 @@ Hosting
     );
 
     CREATE TABLE flora (
-        id SERIAL PRIMARY KEY,  -- Better than composite key
+        id SERIAL PRIMARY KEY,
         common_name VARCHAR(100) NOT NULL,
         scientific_name VARCHAR(100) NOT NULL,
         description TEXT,
         image_url TEXT,
         map_image_url TEXT NULL,
         added_by VARCHAR(50) REFERENCES users(username),
-        UNIQUE (common_name, scientific_name)  -- Ensures name uniqueness
+        UNIQUE (common_name, scientific_name)
     );
 
     -- Create indexes for faster queries
@@ -55,8 +55,8 @@ Hosting
 
     -- Sample data insertion
     INSERT INTO users (username, password_hash, fname, lname) VALUES
-    ('botanist1', crypt('secure123', gen_salt('bf')), 'Jane', 'Doe'),
-    ('researcher2', crypt('mypassword', gen_salt('bf')), 'John', 'Smith');
+    ('botanist1', crypt('secure123', gen_salt('****')), 'Jane', 'Doe'),
+    ('researcher2', crypt('mypassword', gen_salt('****')), 'John', 'Smith');
 
     INSERT INTO user_auth (username, is_author) VALUES
     ('botanist1', TRUE),
